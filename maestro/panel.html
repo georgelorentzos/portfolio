@@ -39,5 +39,16 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+    !function(w, l){
+      w.addEventListener("DOMContentLoaded", () => {
+        var x=l.getItem("firstTime");
+        x||(
+          l.clear(),
+          l.setItem("firstTime","true")
+        )
+      });
+    }(window, localStorage);
+    </script>
   </body>
 </html>
