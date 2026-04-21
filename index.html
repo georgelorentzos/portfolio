@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>George Lorentzos — Full-Stack Engineer</title>
+    <style>
+      @font-face {
+         font-family: "Iowan Old Style Regular";
+         src: url("../fonts/iowan-old-style_regular.woff2") format("woff2");
+         font-weight: normal;
+         font-style: normal;
+      }
+      @font-face {
+         font-family: "Iowan Old Style Bold";
+         src: url("../fonts/iowan-old-style_bold.woff2") format("woff2");
+         font-weight: normal;
+         font-style: normal;
+      }
+      @font-face {
+         font-family: "Iowan Old Style em";
+         src: url("../fonts/iowan-old-style_em.woff2") format("woff2");
+         font-weight: normal;
+         font-style: normal;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+         font-family: "Iowan Old Style Regular", Georgia, serif;
+         background: #fafaf7;
+         color: #111;
+         line-height: 1.8;
+         overflow-x: hidden;
+      }
+
+      h2 { font-family: "Iowan Old Style Bold", Georgia, serif; }
+      h3, em { font-family: "Iowan Old Style em", Georgia, serif; }
+      strong { font-family: "Iowan Old Style Bold", Georgia, serif; }
+
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #f1f1f1; }
+      ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #999; }
+      * { scrollbar-width: thin; scrollbar-color: #ccc #f1f1f1; }
+
+      .page {
+         max-width: 660px;
+         margin: 0 auto;
+         padding: 0 24px;
+      }
+
+      header {
+         padding: 72px 0 52px;
+      }
+
+      h1 {
+         font-family: "Iowan Old Style Bold", Georgia, serif;
+         font-size: clamp(32px, 6vw, 46px);
+         line-height: 1.1;
+         letter-spacing: -0.01em;
+         color: #111;
+         margin-bottom: 4px;
+      }
+
+      .role {
+         font-family: "Iowan Old Style em", Georgia, serif;
+         font-size: clamp(16px, 3vw, 20px);
+         color: #666;
+         margin-bottom: 28px;
+      }
+
+      .about {
+         font-size: 15.5px;
+         color: #333;
+         line-height: 1.85;
+         max-width: 580px;
+      }
+
+      .about .accent { color: #b03218; }
+      .about .accent2 { color: #1a4fa0; }
+
+      .rule {
+         border: none;
+         border-top: 1px solid #cfcfcf;
+         max-width: 660px;
+         margin: 0;
+      }
+
+      .section {
+         padding: 48px 0;
+      }
+
+      .section-title {
+         font-family: "Iowan Old Style Bold", Georgia, serif;
+         font-size: 20px;
+         color: #111;
+         margin-bottom: 28px;
+      }
+
+      .skills-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+         gap: 24px 16px;
+      }
+
+      .skill-group h3 {
+         font-family: "Iowan Old Style em", Georgia, serif;
+         font-size: 13px;
+         color: #b03218;
+         margin-bottom: 10px;
+      }
+
+      .skill-group ul {
+         list-style: disc;
+         padding-left: 18px;
+      }
+
+      .skill-group ul li {
+         font-size: 13.5px;
+         color: #444;
+         padding: 1.5px 0;
+         line-height: 1.6;
+      }
+
+      .project-name-row {
+         display: flex;
+         align-items: baseline;
+         justify-content: space-between;
+         flex-wrap: wrap;
+         gap: 12px;
+         margin-bottom: 4px;
+      }
+
+      .project-name {
+         font-family: "Iowan Old Style Bold", Georgia, serif;
+         font-size: 22px;
+         color: #111;
+      }
+
+      .project-gh {
+         font-size: 13px;
+         color: #1a4fa0;
+         text-decoration: none;
+         border-bottom: 1px solid #1a4fa0;
+         padding-bottom: 1px;
+         transition: opacity 0.2s;
+      }
+
+      .project-gh:hover { opacity: 0.6; }
+
+      .project-type {
+         font-family: "Iowan Old Style em", Georgia, serif;
+         font-size: 13px;
+         color: #888;
+         margin-bottom: 16px;
+      }
+
+      .project-body {
+         font-size: 15px;
+         color: #333;
+         line-height: 1.85;
+         margin-bottom: 16px;
+      }
+
+      .project-body .accent { color: #b03218; }
+      .project-body .accent2 { color: #1a4fa0; }
+
+      .perf-line {
+         font-size: 14.5px;
+         color: #333;
+         line-height: 1.85;
+         margin-bottom: 16px;
+         padding-left: 14px;
+         border-left: 2px solid #b03218;
+      }
+
+      .perf-line strong { color: #b03218; }
+
+      .project-tags {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 6px;
+         margin-top: 18px;
+      }
+
+      .tag {
+         font-size: 12px;
+         background: #f0ede6;
+         color: #666;
+         padding: 3px 9px;
+         border-radius: 2px;
+      }
+
+      .contact-link {
+         font-family: "Iowan Old Style Bold", Georgia, serif;
+         font-size: 18px;
+         color: #111;
+         text-decoration: none;
+         border-bottom: 1px solid #b03218;
+         padding-bottom: 2px;
+         transition: color 0.2s;
+      }
+
+      .contact-link:hover { color: #b03218; }
+
+      .contact-sub {
+         margin-top: 12px;
+         font-size: 13.5px;
+         color: #888;
+      }
+
+      footer {
+         padding: 32px 0 52px;
+      }
+
+      footer p {
+         font-size: 12px;
+         color: #ccc;
+         letter-spacing: 0.06em;
+      }
+
+      @media (max-width: 480px) {
+         .skills-grid { grid-template-columns: 1fr 1fr; }
+         .project-name-row { flex-direction: column; }
+      }
+    </style>
+</head>
+<body>
+<div class="page">
+
+   <header>
+      <h1>George Lorentzos</h1>
+      <div class="role">Full-Stack Software Engineer</div>
+      <p class="about">
+         <strong>7 years of programming experience</strong> — started at age 11, shipping production-grade systems at 18.
+         I build complete applications end-to-end: relational database design, REST APIs,
+         <span class="accent">real-time WebSocket architectures</span>, and responsive frontends.
+         I take ownership of hard technical decisions —
+         most recently <span class="accent2">fully rewriting a production backend from Python to Go</span>,
+         achieving a <strong>6x improvement in API response time</strong> and a significantly more scalable, concurrent system.
+      </p>
+   </header>
+
+   <hr class="rule">
+
+   <div class="section">
+      <h2 class="section-title">Tech Skills</h2>
+      <div class="skills-grid">
+         <div class="skill-group">
+            <h3>Backend</h3>
+            <ul>
+               <li>Go — net/http</li>
+               <li>Python — Flask</li>
+               <li>Python — FastAPI</li>
+               <li>REST APIs</li>
+               <li>WebSockets</li>
+               <li>JWT Auth</li>
+            </ul>
+         </div>
+         <div class="skill-group">
+            <h3>Frontend</h3>
+            <ul>
+               <li>React</li>
+               <li>TypeScript</li>
+               <li>Tailwind CSS</li>
+               <li>JavaScript</li>
+               <li>HTML &amp; CSS</li>
+               <li>Bootstrap</li>
+            </ul>
+         </div>
+         <div class="skill-group">
+            <h3>Databases</h3>
+            <ul>
+               <li>PostgreSQL</li>
+               <li>MySQL</li>
+               <li>SQLite</li>
+               <li>ScyllaDB</li>
+               <li>Redis</li>
+            </ul>
+         </div>
+         <div class="skill-group">
+            <h3>DevOps &amp; Tools</h3>
+            <ul>
+               <li>Docker</li>
+               <li>Git</li>
+               <li>Nginx</li>
+               <li>AWS</li>
+               <li>Linode</li>
+               <li>Bun</li>
+               <li>Ngrok</li>
+            </ul>
+         </div>
+         <div class="skill-group">
+            <h3>Soft Skills</h3>
+            <ul>
+               <li>Problem Solving</li>
+               <li>Creativity</li>
+               <li>Leadership</li>
+               <li>Self-Driven</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+
+   <hr class="rule">
+
+   <div class="section">
+      <h2 class="section-title">Projects</h2>
+
+      <div class="project-name-row">
+         <div class="project-name">Axion</div>
+         <a href="https://github.com/georgelorentzos/axion" class="project-gh" target="_blank">github.com/georgelorentzos/axion →</a>
+      </div>
+      <div class="project-type">Full-Stack &nbsp;·&nbsp; Real-Time &nbsp;·&nbsp; Production-Ready</div>
+
+      <p class="project-body">
+         Axion is a full-stack real-time communication platform built entirely from scratch.
+         It supports <strong>direct messaging with reply threads</strong>, community servers with text channels and categories,
+         a <span class="accent">granular role and permissions system</span>, live online presence, friend management,
+         moderation tools, audit logs, and <span class="accent2">WebSocket-driven real-time updates</span> across every feature.
+         Every component — database schema, backend API, WebSocket layer, and frontend — was independently designed and built.
+      </p>
+
+      <div class="perf-line">
+         <strong>Reduced average API response time from 45ms to 7ms</strong> — a 6x improvement —
+         by fully rewriting the backend from Python FastAPI to Go. The migration also involved
+         refactoring the entire codebase for cleaner architecture, better separation of concerns,
+         and significantly higher WebSocket concurrency. Fully containerized with Docker and built to scale horizontally.
+      </div>
+
+      <div class="project-tags">
+         <span class="tag">Go</span>
+         <span class="tag">React</span>
+         <span class="tag">TypeScript</span>
+         <span class="tag">PostgreSQL</span>
+         <span class="tag">WebSockets</span>
+         <span class="tag">Docker</span>
+         <span class="tag">JWT</span>
+         <span class="tag">Tailwind CSS</span>
+         <span class="tag">Bun</span>
+      </div>
+   </div>
+
+   <hr class="rule">
+
+   <div class="section">
+      <h2 class="section-title">Contact</h2>
+      <a href="mailto:&#103;&#101;&#111;&#114;&#103;&#101;&#108;&#111;&#114;&#101;&#110;&#116;&#122;&#111;&#115;&#64;&#105;&#99;&#108;&#111;&#117;&#100;&#46;&#99;&#111;&#109;" class="contact-link">
+  &#103;&#101;&#111;&#114;&#103;&#101;&#108;&#111;&#114;&#101;&#110;&#116;&#122;&#111;&#115;&#64;&#105;&#99;&#108;&#111;&#117;&#100;&#46;&#99;&#111;&#109;
+      </a>
+      <p class="contact-sub">Open to full-time roles and freelance projects.</p>
+   </div>
+
+</div>
+</body>
+</html>
