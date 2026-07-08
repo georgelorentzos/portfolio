@@ -51,6 +51,10 @@ html{scrollbar-width:none;-ms-overflow-style:none}
 .top nav a{font-size:13.5px;color:var(--dim);text-decoration:none;transition:color .15s}
 .top nav a:hover{color:#fff}
 .top nav a.here{color:#fff}
+@media(max-width:640px){
+  .top{justify-content:center}
+  .top .brand{display:none}
+}
 
 .btn{
   display:inline-block;background:#fff;color:#000;text-decoration:none;
@@ -321,6 +325,9 @@ h1 .dim{color:#6b7280}
 
 <script>
 
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+addEventListener('pageshow', () => scrollTo(0, 0));
+
 document.querySelectorAll('.seq').forEach(sec => {
   const slides = [...sec.querySelectorAll('.slide')];
   const banner = document.getElementById('cmdbanner');
@@ -347,7 +354,7 @@ document.querySelectorAll('.seq').forEach(sec => {
   });
   const place = () => {
     const step = (sec.offsetHeight - innerHeight) / slides.length;
-    marks.forEach((m, i) => { m.style.top = (step * (i + .5)) + 'px'; });
+    marks.forEach((m, i) => { m.style.top = i ? (step * (i + .5)) + 'px' : '0px'; });
   };
   place();
   addEventListener('resize', place);
