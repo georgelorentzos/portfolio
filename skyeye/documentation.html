@@ -68,9 +68,18 @@ html{scrollbar-width:none;-ms-overflow-style:none}
 .top nav a{font-size:13.5px;color:var(--dim);text-decoration:none;transition:color .15s}
 .top nav a:hover{color:#fff}
 .top nav a.here{color:#fff}
+@media(max-width:640px){
+  .top{justify-content:center}
+  .top .brand{display:none}
+}
 
-.main{padding:56px 56px 140px;min-width:0}
-@media(max-width:860px){.main{padding:44px 26px 100px}}
+.main,.side{
+  opacity:0;transform:translateY(52px) scale(.985);filter:blur(10px);
+  transition:opacity .55s ease,transform .6s cubic-bezier(.2,.7,.3,1),filter .55s ease;
+}
+.main.in,.side.in{opacity:1;transform:none;filter:none}
+.main{padding:calc(clamp(110px,15vh,160px) - 75px) 56px 140px;min-width:0}
+@media(max-width:860px){.main{padding:calc(clamp(110px,15vh,160px) - 75px) 26px 100px}}
 .main section{margin-bottom:64px;scroll-margin-top:99px}
 h1{font-family:var(--disp);font-weight:700;font-size:clamp(38px,4.5vw,52px);letter-spacing:-.04em;line-height:1.02;margin-bottom:20px;color:#fff}
 h1 .dim,h2 .dim{color:#6b7280}
@@ -103,6 +112,9 @@ th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--hair2);ver
 th{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);border-bottom:1px solid var(--hair)}
 td code{white-space:nowrap;font-size:12.5px}
 td:last-child{color:var(--dim)}
+@media(max-width:860px){
+  table{display:block;overflow-x:auto}
+}
 .tag2{display:inline-block;font-family:var(--sans);font-weight:500;font-size:10.5px;letter-spacing:.08em;color:var(--faint);border:1px solid var(--hair);padding:1px 7px;margin-left:6px}
 .pill{font-family:var(--sans);font-weight:500;font-size:11px;color:var(--txt);border:1px solid rgba(255,255,255,.32);padding:1px 7px}
 </style>
@@ -568,6 +580,13 @@ const spy = () => {
 addEventListener('scroll', spy, { passive: true });
 addEventListener('resize', spy);
 spy();
+
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+addEventListener('pageshow', () => { if (!location.hash) scrollTo(0, 0); });
+
+requestAnimationFrame(() => requestAnimationFrame(() => {
+  document.querySelectorAll('.main,.side').forEach(el => el.classList.add('in'));
+}));
 </script>
 </body>
 </html>
