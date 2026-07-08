@@ -37,7 +37,6 @@ body{
 html{scrollbar-width:none;-ms-overflow-style:none}
 ::-webkit-scrollbar{display:none}
 
-#prog{position:fixed;top:0;left:0;height:2px;width:0;background:#fff;z-index:99;opacity:.6}
 
 .top{
   position:fixed;top:0;left:0;right:0;z-index:50;
@@ -73,6 +72,10 @@ h1 .dim{color:#6b7280}
 
 .seq{position:relative}
 .facts{height:2590vh}
+.snap{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start;scroll-snap-stop:always}
+@media(pointer:coarse){
+  html{scroll-snap-type:y mandatory}
+}
 .seq-sticky{position:sticky;top:0;height:100vh;overflow:hidden}
 .slide{
   position:absolute;inset:0;display:flex;flex-direction:column;
@@ -105,7 +108,6 @@ h1 .dim{color:#6b7280}
 </style>
 </head>
 <body>
-<div id="prog"></div>
 
 <header class="top">
   <div class="brand"><a href="index.html">Sky<span class="d">Eye</span></a></div>
@@ -319,12 +321,6 @@ h1 .dim{color:#6b7280}
 
 <script>
 
-const prog = document.getElementById('prog');
-addEventListener('scroll', () => {
-  const h = document.documentElement;
-  prog.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
-}, { passive: true });
-
 document.querySelectorAll('.seq').forEach(sec => {
   const slides = [...sec.querySelectorAll('.slide')];
   const banner = document.getElementById('cmdbanner');
@@ -342,6 +338,19 @@ document.querySelectorAll('.seq').forEach(sec => {
   addEventListener('scroll', update, { passive: true });
   addEventListener('resize', update);
   update();
+
+  const marks = slides.map(() => {
+    const m = document.createElement('div');
+    m.className = 'snap';
+    sec.appendChild(m);
+    return m;
+  });
+  const place = () => {
+    const step = (sec.offsetHeight - innerHeight) / slides.length;
+    marks.forEach((m, i) => { m.style.top = (step * (i + .5)) + 'px'; });
+  };
+  place();
+  addEventListener('resize', place);
 });
 
 document.getElementById('howbtn').addEventListener('click', e => {
