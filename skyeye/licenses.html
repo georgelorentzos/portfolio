@@ -48,12 +48,19 @@ html{scrollbar-width:none;-ms-overflow-style:none}
 .top nav a{font-size:13.5px;color:var(--dim);text-decoration:none;transition:color .15s}
 .top nav a:hover{color:#fff}
 .top nav a.here{color:#fff}
+@media(max-width:640px){
+  .top{justify-content:center}
+  .top .brand{display:none}
+}
 
 .page{
   min-height:100vh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:140px 32px 90px;text-align:center;
+  align-items:center;justify-content:flex-start;
+  padding:clamp(110px,15vh,160px) 32px 90px;text-align:center;
+  opacity:0;transform:translateY(52px) scale(.985);filter:blur(10px);
+  transition:opacity .55s ease,transform .6s cubic-bezier(.2,.7,.3,1),filter .55s ease;
 }
+.page.in{opacity:1;transform:none;filter:none}
 .kicker{
   font-family:var(--sans);font-weight:500;font-size:14px;
   color:var(--faint);margin-bottom:22px;
@@ -204,5 +211,13 @@ h1 .dim{color:#6b7280}
 
 </main>
 
+<script>
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+addEventListener('pageshow', () => scrollTo(0, 0));
+
+requestAnimationFrame(() => requestAnimationFrame(() => {
+  document.querySelector('.page').classList.add('in');
+}));
+</script>
 </body>
 </html>
